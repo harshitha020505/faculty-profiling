@@ -1,6 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FacultyDashboard from "./FacultyDashboard";
-// import About from "./About";
 import CSE from "./CSE";
 import IT from "./IT";
 import ECE from "./ECE";
@@ -13,15 +12,14 @@ import CHEM from "./CHEM";
 import BIO from "./BIO";
 import Departments from "./Departments";
 import FacultyForm from "./FacultyForm";
-// import Signup from "./Signup";
 
 function App() {
   return (
-    <div>
+    <BrowserRouter basename="/faculty-profiling">
       <Routes>
         <Route path="/" element={<FacultyDashboard />} />
         <Route path="/departments" element={<Departments />} />
-        
+
         {/* Department Routes */}
         <Route path="/faculty-directory/CSE" element={<CSE />} />
         <Route path="/faculty-directory/IT" element={<IT />} />
@@ -34,12 +32,8 @@ function App() {
         <Route path="/faculty-directory/ai" element={<AI />} />
         <Route path="/faculty-directory/bio" element={<BIO />} />
         <Route path="/FacultyForm" element={<FacultyForm />} />
-
-        {/* Auth Routes */}
-        {/* <Route path="/login" element={<Login />} /> */}
-        {/* <Route path="/signup" element={<Signup />} /> */}
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 
