@@ -2,7 +2,7 @@
   "name": "faculty-profiling",
   "version": "1.0.0",
   "private": true,
-  "homepage":"https://harshitha020505.github.io/faculty-profiling",
+  "homepage":"homepage": "https://harshitha020505.github.io/faculty-profiling",
   "dependencies": {
     "axios": "^1.8.4",
     "react": "^18.2.0",
