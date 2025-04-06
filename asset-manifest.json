@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/harshitha020505/faculty-profiling/static/css/main.8d82306c.css",
-    "main.js": "/harshitha020505/faculty-profiling/static/js/main.dfbcf22c.js",
-    "index.html": "/harshitha020505/faculty-profiling/index.html",
-    "main.8d82306c.css.map": "/harshitha020505/faculty-profiling/static/css/main.8d82306c.css.map",
-    "main.dfbcf22c.js.map": "/harshitha020505/faculty-profiling/static/js/main.dfbcf22c.js.map"
+    "main.css": "/faculty-profiling/static/css/main.8d82306c.css",
+    "main.js": "/faculty-profiling/static/js/main.dfbcf22c.js",
+    "index.html": "/faculty-profiling/index.html",
+    "main.8d82306c.css.map": "/faculty-profiling/static/css/main.8d82306c.css.map",
+    "main.dfbcf22c.js.map": "/faculty-profiling/static/js/main.dfbcf22c.js.map"
   },
   "entrypoints": [
     "static/css/main.8d82306c.css",
