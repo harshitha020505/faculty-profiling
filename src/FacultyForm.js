@@ -66,7 +66,7 @@ const FacultyForm = () => {
       if (profilePicture) formData.append("profile_picture", profilePicture);
       if (resume) formData.append("resume", resume);
 
-      await axios.post("http://localhost:5000/faculty", formData, {
+      await axios.post("http://localhost:5000", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

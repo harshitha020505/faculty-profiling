@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 
@@ -13,6 +13,7 @@ const FacultyDashboard = () => {
   };
 
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const scrollToSection = (section) => {
     sections[section]?.current?.scrollIntoView({ behavior: "smooth" });
@@ -20,9 +21,9 @@ const FacultyDashboard = () => {
 
   return (
     <div className="faculty-dashboard">
-      {/* Header Section */}
       <header className="header">
         <div className="logo">🎓 Faculty Profiling</div>
+        
         <nav>
           <input 
             type="text" 
@@ -30,15 +31,27 @@ const FacultyDashboard = () => {
             className="search-bar"
           />
         </nav>
-        <button 
-          className="create-profile-btn" 
-          onClick={() => navigate("/FacultyForm")}
-        >
-          + Create Profile
-        </button>
+
+        <div className="auth-buttons">
+          {isLoggedIn ? (
+            <div className="profile-icon">
+              <img 
+                src="profile.jpg" 
+                alt="Profile" 
+                className="profile-img"
+                onClick={() => navigate("/profile")}
+              />
+            </div>
+          ) : (
+            <>
+              <button className="login-btn" onClick={() => navigate("/login")}>Login</button>
+              <button className="signup-btn" onClick={() => navigate("/signup")}>Sign Up</button>
+              <button className="create-profile-btn" onClick={() => navigate("/faculty-form")}>Create Profile</button>
+            </>
+          )}
+        </div>
       </header>
 
-      {/* Navigation Menu */}
       <ul className="menu">
         {Object.keys(sections).map((section) => (
           <li key={section} onClick={() => scrollToSection(section)}>
@@ -47,7 +60,6 @@ const FacultyDashboard = () => {
         ))}
       </ul>
 
-      {/* Hero Section - Get Started */}
       <section className="hero">
         <div className="hero-content">
           <h1>Explore Faculty Profiles & Research</h1>
@@ -58,19 +70,16 @@ const FacultyDashboard = () => {
         </div>
       </section>
 
-      {/* Problem Section */}
       <section ref={sections.problem} className="box">
         <h2>The Problem</h2>
         <p>Students and researchers often struggle to find the right faculty for guidance and collaboration.</p>
       </section>
 
-      {/* Solution Section */}
       <section ref={sections.solution} className="box">
         <h2>Our Solution</h2>
         <p>We provide a centralized platform to explore faculty profiles, their research, and top contributions.</p>
       </section>
 
-      {/* Portfolio Section */}
       <section ref={sections.portfolio} className="box">
         <h2>Our Work</h2>
         <div className="grid">
@@ -80,7 +89,6 @@ const FacultyDashboard = () => {
         </div>
       </section>
 
-      {/* Top Professors Section */}
       <section ref={sections.topProfessors} className="box">
         <h2>Top Professors</h2>
         <div className="grid">
@@ -97,7 +105,6 @@ const FacultyDashboard = () => {
         </div>
       </section>
 
-      {/* Top Articles Written by Faculty */}
       <section ref={sections.topArticles} className="box">
         <h2>Top Articles Written by Faculty</h2>
         <ul className="article-list">
@@ -112,13 +119,11 @@ const FacultyDashboard = () => {
         </ul>
       </section>
 
-      {/* About Us Section */}
       <section ref={sections.about} className="box">
         <h2>About Us</h2>
         <p>We are dedicated to bridging the gap between students and faculty through an intuitive research platform.</p>
       </section>
 
-      {/* Footer Section */}
       <footer className="footer">
         <p>© 2025 FacultyPro. All rights reserved.</p>
       </footer>
@@ -126,4 +131,4 @@ const FacultyDashboard = () => {
   );
 };
 
-export default FacultyDashboard;
+export default FacultyDashboard; 

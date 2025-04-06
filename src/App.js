@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import FacultyDashboard from "./FacultyDashboard";
 import CSE from "./CSE";
 import IT from "./IT";
@@ -12,28 +12,37 @@ import CHEM from "./CHEM";
 import BIO from "./BIO";
 import Departments from "./Departments";
 import FacultyForm from "./FacultyForm";
+import LoginPage from "./LoginPage"; // Import Login Page
+import SignupPage from "./SignupPage"; // Import Login Page
+import FacultyDetails from "./FacultyDetails"
 
 function App() {
   return (
-    <BrowserRouter basename="/faculty-profiling">
-      <Routes>
-        <Route path="/" element={<FacultyDashboard />} />
-        <Route path="/departments" element={<Departments />} />
+    <Routes>
+      <Route path="/" element={<FacultyDashboard />} />
+      <Route path="/departments" element={<Departments />} />
 
-        {/* Department Routes */}
-        <Route path="/faculty-directory/CSE" element={<CSE />} />
-        <Route path="/faculty-directory/IT" element={<IT />} />
-        <Route path="/faculty-directory/ECE" element={<ECE />} />
-        <Route path="/faculty-directory/EEE" element={<EEE />} />
-        <Route path="/faculty-directory/mech" element={<MECH />} />
-        <Route path="/faculty-directory/civil" element={<CIVIL />} />
-        <Route path="/faculty-directory/chem" element={<CHEM />} />
-        <Route path="/faculty-directory/ml" element={<ML />} />
-        <Route path="/faculty-directory/ai" element={<AI />} />
-        <Route path="/faculty-directory/bio" element={<BIO />} />
-        <Route path="/FacultyForm" element={<FacultyForm />} />
-      </Routes>
-    </BrowserRouter>
+      {/* Department Routes */}
+      <Route path="/faculty-directory/cse" element={<CSE />} />
+      <Route path="/faculty-directory/it" element={<IT />} />
+      <Route path="/faculty-directory/ece" element={<ECE />} />
+      <Route path="/faculty-directory/eee" element={<EEE />} />
+      <Route path="/faculty-directory/mech" element={<MECH />} />
+      <Route path="/faculty-directory/civil" element={<CIVIL />} />
+      <Route path="/faculty-directory/chem" element={<CHEM />} />
+      <Route path="/faculty-directory/ml" element={<ML />} />
+      <Route path="/faculty-directory/ai" element={<AI />} />
+      <Route path="/faculty-directory/bio" element={<BIO />} />
+      <Route path="/faculty/:id" element={<FacultyDetails />} />
+
+
+      {/* Authentication Routes */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+
+      {/* Other Routes */}
+      <Route path="/faculty-form" element={<FacultyForm />} />
+    </Routes>
   );
 }
 

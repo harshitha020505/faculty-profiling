@@ -2,11 +2,7 @@
   "name": "faculty-profiling",
   "version": "1.0.0",
   "private": true,
-<<<<<<< HEAD
-  "homepage": "https://harshitha020505.github.io/facultyProfiling",
-=======
-  "homepage": "https://harshitha020505.github.io/faculty-profiling",
->>>>>>> 2d1b6750337feddb58c60d496cdd82abdfa79a36
+  "homepage": "https://github.com/harshitha020505/faculty-profiling",
   "dependencies": {
     "axios": "^1.8.4",
     "react": "^18.2.0",
@@ -18,8 +14,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Department.css";
 
 const ECE = () => {
-  const facultyList = [
-    { id: 1, name: "Dr. X. Patel", email: "x.patel@example.com" },
-    { id: 2, name: "Prof. Y. Iyer", email: "y.iyer@example.com" },
-  ];
+  const [facultyList, setFacultyList] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000") // ✅ Replace with your backend API
+      .then((response) => response.json())
+      .then((data) => setFacultyList(data))
+      .catch((error) => console.error("Error fetching faculty:", error));
+  }, []);
 
   return (
     <div className="department-container">
@@ -13,7 +18,9 @@ const ECE = () => {
       <ul>
         {facultyList.map((faculty) => (
           <li key={faculty.id}>
-            <h3>{faculty.name}</h3>
+            <h3>
+              <Link to={`/faculty/${faculty.id}`}>{faculty.name}</Link>
+            </h3>
             <p>Email: <a href={`mailto:${faculty.email}`}>{faculty.email}</a></p>
           </li>
         ))}
