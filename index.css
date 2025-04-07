@@ -102,3 +102,15 @@ nav input {
     list-style: none;
     padding: 0;
 }
+.card.highlight {
+  background-color: #f0f8ff;
+  color:black;
+  border: 2px solid #007bff;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 20px auto;
+  width: fit-content;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
