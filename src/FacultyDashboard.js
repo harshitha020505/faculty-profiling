@@ -19,6 +19,17 @@ const FacultyDashboard = () => {
     sections[section]?.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const facultyData = [
+    { name: "Dr. Alice Johnson", field: "AI & Machine Learning", views: 145 },
+    { name: "Dr. Robert Smith", field: "Quantum Computing", views: 110 },
+    { name: "Dr. Emily Davis", field: "Cybersecurity", views: 85 },
+    { name: "Dr. Michael Brown", field: "Data Science", views: 75 }
+  ];
+
+  const mostSought = facultyData.reduce((prev, current) =>
+    current.views > prev.views ? current : prev
+  );
+
   return (
     <div className="faculty-dashboard">
       <header className="header">
@@ -92,10 +103,7 @@ const FacultyDashboard = () => {
       <section ref={sections.topProfessors} className="box">
         <h2>Top Professors</h2>
         <div className="grid">
-          {[{ name: "Dr. Alice Johnson", field: "AI & Machine Learning" },
-            { name: "Dr. Robert Smith", field: "Quantum Computing" },
-            { name: "Dr. Emily Davis", field: "Cybersecurity" },
-            { name: "Dr. Michael Brown", field: "Data Science" }].map((professor, index) => (
+          {facultyData.map((professor, index) => (
             <div key={index} className="card">
               <strong>{professor.name}</strong>
               <br />
@@ -108,15 +116,27 @@ const FacultyDashboard = () => {
       <section ref={sections.topArticles} className="box">
         <h2>Top Articles Written by Faculty</h2>
         <ul className="article-list">
-          {[{ title: "AI Ethics & Bias", author: "Dr. Alice Johnson" },
+          {[
+            { title: "AI Ethics & Bias", author: "Dr. Alice Johnson" },
             { title: "Advancements in Quantum Computing", author: "Dr. Robert Smith" },
             { title: "Cybersecurity Trends in 2025", author: "Dr. Emily Davis" },
-            { title: "Big Data & Its Impact", author: "Dr. Michael Brown" }].map((article, index) => (
+            { title: "Big Data & Its Impact", author: "Dr. Michael Brown" }
+          ].map((article, index) => (
             <li key={index} className="article-item">
               <strong>{article.title}</strong> - {article.author}
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* 🔥 Most Sought After Faculty */}
+      <section className="box">
+        <h2>Most Sought After Faculty</h2>
+        <div className="card highlight">
+          <h3>{mostSought.name}</h3>
+          <p>{mostSought.field}</p>
+          <p>⭐ User Favorite - Viewed {mostSought.views} times</p>
+        </div>
       </section>
 
       <section ref={sections.about} className="box">
@@ -131,4 +151,4 @@ const FacultyDashboard = () => {
   );
 };
 
-export default FacultyDashboard; 
+export default FacultyDashboard;
