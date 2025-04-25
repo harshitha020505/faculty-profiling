@@ -1,56 +1,86 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./index.css";
+import "./SignupPage.css";
+import { Eye, EyeOff } from "lucide-react";
 
-const SignupPage = () => {
+const generatePassword = () => {
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$!";
+  let password = "";
+  for (let i = 0; i < 12; i++) {
+    password += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return password;
+};
+
+const Signup = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [showPassword1, setShowPassword1] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const [passwordMatch, setPasswordMatch] = useState(true);
   const navigate = useNavigate();
-  const [userType, setUserType] = useState("faculty"); // Default to faculty signup
+
+  useEffect(() => {
+    if (name && email) {
+      const suggested = generatePassword();
+      setPassword1(suggested);
+      setPassword2(suggested);
+    }
+  }, [name, email]);
+
+  useEffect(() => {
+    setPasswordMatch(password1 === password2);
+  }, [password1, password2]);
 
   const handleSignup = (e) => {
     e.preventDefault();
-    alert(`${userType} signup successful!`);
-    navigate("/"); // Redirect to dashboard after signup
+    if (!passwordMatch) return;
+    console.log("Signing up:", name, email, password1);
+    navigate("/login");
   };
 
   return (
-    <div className="login-container"> 
-      <h2>Sign Up</h2>
-      <div className="user-type-toggle">
-        <button
-          className={userType === "faculty" ? "active" : ""}
-          onClick={() => setUserType("faculty")}
-        >
-          Faculty Signup
-        </button>
-        <button
-          className={userType === "authority" ? "active" : ""}
-          onClick={() => setUserType("authority")}
-        >
-          Higher Authority Signup
-        </button>
-      </div>
+    <div className="signup-container">
+      <h2>Create an Account</h2>
       <form onSubmit={handleSignup}>
-        <div className="form-group">
-          <label>Name</label>
-          <input type="text" placeholder="Enter your name" required />
+        <input type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} required />
+        <input type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        
+        <div className="password-input">
+          <input
+            type={showPassword1 ? "text" : "password"}
+            placeholder="Create Password"
+            value={password1}
+            onChange={(e) => setPassword1(e.target.value)}
+            required
+          />
+          <span onClick={() => setShowPassword1(!showPassword1)}>
+            {showPassword1 ? <EyeOff size={20} /> : <Eye size={20} />}
+          </span>
         </div>
-        <div className="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="Enter your email" required />
+
+        <div className="password-input">
+          <input
+            type={showPassword2 ? "text" : "password"}
+            placeholder="Confirm Password"
+            value={password2}
+            onChange={(e) => setPassword2(e.target.value)}
+            required
+          />
+          <span onClick={() => setShowPassword2(!showPassword2)}>
+            {showPassword2 ? <EyeOff size={20} /> : <Eye size={20} />}
+          </span>
         </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input type="password" placeholder="Enter your password" required />
-        </div>
-        <button type="submit">Sign Up as {userType === "faculty" ? "Faculty" : "Higher Authority"}</button>
+
+        {!passwordMatch && <p className="error-text">Passwords do not match</p>}
+
+        <button type="submit" disabled={!passwordMatch}>Sign Up</button>
       </form>
-      <p>
-        Already have an account? <span className="signup-link" onClick={() => navigate("/login")}>
-          Login here
-        </span>
-      </p>
+      <p>Already have an account? <a href="/login">Log In</a></p>
     </div>
   );
 };
 
-export default SignupPage;
+export default Signup;
