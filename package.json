@@ -1,11 +1,13 @@
 {
-  "name": "faculty-profiling",
+  "name": "MiniProject",
   "version": "1.0.0",
-  "private": true,
-  "homepage": "https://harshitha020505.github.io/faculty-profiling",
+  "private": false,
+  "homepage": "https://harshitha020505.github.io/MiniProject",
   "dependencies": {
     "axios": "^1.8.4",
+    "cors": "^2.8.5",
     "lucide-react": "^0.487.0",
+    "multer": "^1.4.5-lts.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.4.0",

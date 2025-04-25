@@ -102,3 +102,35 @@ nav input {
     list-style: none;
     padding: 0;
 }
+.login-btn, .signup-btn {
+    padding: 10px 20px;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Login Button Style */
+.login-btn {
+    background-color: white;
+    color: navy;
+    border: 2px solid navy;
+}
+
+.login-btn:hover {
+    background-color: navy;
+    color: white;
+}
+
+/* Sign Up Button Style */
+.signup-btn {
+    background-color: #1E90FF; /* Dodger Blue */
+    color: white;
+    font-weight: bold;
+}
+
+.signup-btn:hover {
+    background-color: #0056b3;
+}
+
