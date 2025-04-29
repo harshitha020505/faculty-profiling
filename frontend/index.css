@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f9f9f9;
+    
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: navy;
+    padding: 15px 20px;
+    color:white;
+}
+.c1{
+    align-items: left;
+}
+
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.hero {
+    padding: 50px;
+    background: white;
+}
+
+.hero h1 {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.hero button {
+    padding: 10px 20px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: #FFF8DC;
+}
+
+.feature {
+    width: 30%;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.testimonials {
+    background: white;
+    padding: 30px;
+}
+
+.testimonial {
+    background: #FFF8DC;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.pricing {
+    padding: 40px;
+    background: white;
+}
+
+.plan {
+    display: inline-block;
+    width: 30%;
+    padding: 15px;
+    background: yellow;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.plan ul {
+    list-style: none;
+    padding: 0;
+}

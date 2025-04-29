@@ -102,6 +102,7 @@ nav input {
     list-style: none;
     padding: 0;
 }
+<<<<<<< HEAD
 .login-btn, .signup-btn {
     padding: 10px 20px;
     font-size: 15px;
@@ -132,5 +133,17 @@ nav input {
 
 .signup-btn:hover {
     background-color: #0056b3;
+=======
+.card.highlight {
+  background-color: #f0f8ff;
+  color:black;
+  border: 2px solid #007bff;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 20px auto;
+  width: fit-content;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+>>>>>>> 6a5793f68f15c1a76a23b507848fa408282512b5
 }
 

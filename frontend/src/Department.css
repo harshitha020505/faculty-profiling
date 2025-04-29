@@ -1,0 +1,45 @@
+.department-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.department-container h1 {
+  text-align: center;
+  color: #333;
+}
+
+.department-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.department-container li {
+  background: #f9f9f9;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 5px;
+  border-left: 5px solid #007bff;
+}
+
+.department-container li h3 {
+  margin: 0;
+  color: #007bff;
+}
+
+.department-container li p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.department-container li a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.department-container li a:hover {
+  text-decoration: underline;
+}

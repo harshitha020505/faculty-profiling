@@ -1,0 +1,65 @@
+.edit-profile-wrapper {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.edit-profile-wrapper h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.edit-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.edit-profile-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #444;
+}
+
+.edit-profile-form input,
+.edit-profile-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 5px;
+  font-size: 1rem;
+}
+
+.edit-profile-form input:focus,
+.edit-profile-form textarea:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.edit-profile-form button {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #0077ff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.edit-profile-form button:hover {
+  background-color: #005ecc;
+}

@@ -1,0 +1,54 @@
+/* General Layout */
+.departments-container {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  /* Title */
+  .departments-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 30px;
+  }
+  
+  /* Grid Layout */
+  .departments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  /* Department Card */
+  .department-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .department-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Department Name */
+  .dept-name {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  

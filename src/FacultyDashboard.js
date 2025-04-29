@@ -1,19 +1,54 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./index.css";
 
 const FacultyDashboard = () => {
   const sections = {
-    problem: useRef(null),
-    solution: useRef(null),
-    portfolio: useRef(null),
+    departments: useRef(null),
     topProfessors: useRef(null),
     topArticles: useRef(null),
+    mostSought: useRef(null),
     about: useRef(null),
   };
 
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // ── Search state ─────────────────────────────────────────────────────────────
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  // fetch search results from backend
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setSearchResults([]);
+      setShowDropdown(false);
+      return;
+    }
+    const handle = setTimeout(async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/api/faculty/search?q=${encodeURIComponent(
+            searchQuery
+          )}`
+        );
+        setSearchResults(res.data);
+        setShowDropdown(true);
+      } catch {
+        setSearchResults([]);
+        setShowDropdown(true);
+      }
+    }, 300);
+    return () => clearTimeout(handle);
+  }, [searchQuery]);
+
+  const handleSelect = (id) => {
+    setSearchQuery("");
+    setShowDropdown(false);
+    navigate(`/faculty/${id}`);
+  };
 
   const scrollToSection = (section) => {
     sections[section]?.current?.scrollIntoView({ behavior: "smooth" });
@@ -23,7 +58,7 @@ const FacultyDashboard = () => {
     { name: "Dr. Alice Johnson", field: "AI & Machine Learning", views: 145 },
     { name: "Dr. Robert Smith", field: "Quantum Computing", views: 110 },
     { name: "Dr. Emily Davis", field: "Cybersecurity", views: 85 },
-    { name: "Dr. Michael Brown", field: "Data Science", views: 75 }
+    { name: "Dr. Michael Brown", field: "Data Science", views: 75 },
   ];
 
   const mostSought = facultyData.reduce((prev, current) =>
@@ -34,34 +69,103 @@ const FacultyDashboard = () => {
     <div className="faculty-dashboard">
       <header className="header">
         <div className="logo">🎓 Faculty Profiling</div>
-        
-        <nav>
-          <input 
-            type="text" 
-            placeholder="Search faculty or articles..." 
+
+        <nav style={{ position: 'relative' }}>
+          <input
+            type="text"
+            placeholder="Search faculty or articles..."
             className="search-bar"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => searchResults.length > 0 && setShowDropdown(true)}
+            onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
           />
+          {showDropdown && (
+  <ul className="search-dropdown">
+    {searchResults.length > 0 ? (
+      searchResults.map((fac) => (
+        <li
+          key={fac._id}
+          className="dropdown-item"
+          onMouseDown={() => handleSelect(fac._id)}
+        >
+          {fac.name}
+        </li>
+      ))
+    ) : (
+      <li className="dropdown-item no-results">No results found</li>
+    )}
+  </ul>
+)}
+
         </nav>
 
         <div className="auth-buttons">
           {isLoggedIn ? (
             <div className="profile-icon">
-              <img 
-                src="profile.jpg" 
-                alt="Profile" 
+              <img
+                src="profile.jpg"
+                alt="Profile"
                 className="profile-img"
-                onClick={() => navigate("/profile")}
+                onClick={() => navigate("/FacultyProfile")}
               />
             </div>
           ) : (
             <>
-              <button className="login-btn" onClick={() => navigate("/login")}>Login</button>
-              <button className="signup-btn" onClick={() => navigate("/signup")}>Sign Up</button>
-              <button className="create-profile-btn" onClick={() => navigate("/faculty-form")}>Create Profile</button>
+              <button
+                className="login-btn"
+                onClick={() => navigate("/login")}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#007bff",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                  padding: 0,
+                  marginRight: "1rem",
+                  fontSize: "1rem",
+                }}
+              >
+                Login
+              </button>
+              <button
+                className="signup-btn"
+                onClick={() => navigate("/signup")}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#007bff",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                  padding: 0,
+                  marginRight: "1rem",
+                  fontSize: "1rem",
+                }}
+              >
+                Sign Up
+              </button>
             </>
           )}
         </div>
       </header>
+      {/* SEARCH RESULTS DISPLAY */}
+    
+    
+
+      {/* No results found */}
+      {searchQuery.trim() && searchResults.length === 0 && (
+        <div
+          className="no-results"
+          style={{
+            margin: "1rem",
+            padding: "1rem",
+            backgroundColor: "#f9f9f9",
+            borderRadius: "10px",
+          }}
+        >
+          <h3>No results found</h3>
+        </div>
+      )}
 
       <ul className="menu">
         {Object.keys(sections).map((section) => (
@@ -71,32 +175,69 @@ const FacultyDashboard = () => {
         ))}
       </ul>
 
-      <section className="hero">
-        <div className="hero-content">
-          <h1>Explore Faculty Profiles & Research</h1>
-          <p>Discover top professors and their impactful research.</p>
-          <button className="cta-button" onClick={() => navigate("/departments")}>
-            Get Started
-          </button>
-        </div>
-      </section>
-
-      <section ref={sections.problem} className="box">
-        <h2>The Problem</h2>
-        <p>Students and researchers often struggle to find the right faculty for guidance and collaboration.</p>
-      </section>
-
-      <section ref={sections.solution} className="box">
-        <h2>Our Solution</h2>
-        <p>We provide a centralized platform to explore faculty profiles, their research, and top contributions.</p>
-      </section>
-
-      <section ref={sections.portfolio} className="box">
-        <h2>Our Work</h2>
-        <div className="grid">
-          <img src="portfolio1.jpg" alt="Portfolio 1" className="portfolio-img" />
-          <img src="portfolio2.jpg" alt="Portfolio 2" className="portfolio-img" />
-          <img src="portfolio3.jpg" alt="Portfolio 3" className="portfolio-img" />
+      <section ref={sections.departments} className="main-content">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            padding: "3rem",
+            backgroundColor: "white",
+            borderRadius: "20px",
+            margin: "2rem auto",
+            maxWidth: "95%",
+            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            gap: "2rem",
+          }}
+        >
+          <div style={{ flex: 1.2 }}>
+            <h1>Connect with your scientific community</h1>
+            <p>
+              Share your research, collaborate with your peers, and get the
+              support you need to advance your career.
+            </p>
+          </div>
+          <div style={{ flex: 2 }}>
+            <h4 style={{ fontSize: "1.3rem", marginBottom: "1rem" }}>
+              <button onClick={() => navigate("/faculty-list")} className="c1">
+                VISIT TOPIC PAGES
+              </button>
+            </h4>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "0.6rem",
+              }}
+            >
+              {[
+                "Computer Science",
+                "Information Technology",
+                "Electronics Communication Engineering",
+                "Electrical Electronics Engineering",
+                "Mechanical Engineering",
+                "Civil Engineering",
+              ].map((topic, idx) => (
+                <span
+                  key={idx}
+                  style={{
+                    backgroundColor: "#dfefff",
+                    color: "#003366",
+                    padding: "0.5rem 1rem",
+                    borderRadius: "20px",
+                    fontSize: "1rem",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s ease",
+                  }}
+                  onMouseOver={(e) => (e.target.style.backgroundColor = "#cbe0ff")}
+                  onMouseOut={(e) => (e.target.style.backgroundColor = "#dfefff")}
+                  onClick={() => navigate("/CSE")}
+                >
+                  {topic}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -118,9 +259,15 @@ const FacultyDashboard = () => {
         <ul className="article-list">
           {[
             { title: "AI Ethics & Bias", author: "Dr. Alice Johnson" },
-            { title: "Advancements in Quantum Computing", author: "Dr. Robert Smith" },
-            { title: "Cybersecurity Trends in 2025", author: "Dr. Emily Davis" },
-            { title: "Big Data & Its Impact", author: "Dr. Michael Brown" }
+            {
+              title: "Advancements in Quantum Computing",
+              author: "Dr. Robert Smith",
+            },
+            {
+              title: "Cybersecurity Trends in 2025",
+              author: "Dr. Emily Davis",
+            },
+            { title: "Big Data & Its Impact", author: "Dr. Michael Brown" },
           ].map((article, index) => (
             <li key={index} className="article-item">
               <strong>{article.title}</strong> - {article.author}
@@ -129,8 +276,7 @@ const FacultyDashboard = () => {
         </ul>
       </section>
 
-      {/* 🔥 Most Sought After Faculty */}
-      <section className="box">
+      <section ref={sections.mostSought} className="box">
         <h2>Most Sought After Faculty</h2>
         <div className="card highlight">
           <h3>{mostSought.name}</h3>
@@ -141,7 +287,10 @@ const FacultyDashboard = () => {
 
       <section ref={sections.about} className="box">
         <h2>About Us</h2>
-        <p>We are dedicated to bridging the gap between students and faculty through an intuitive research platform.</p>
+        <p>
+          We are dedicated to bridging the gap between students and faculty
+          through an intuitive research platform.
+        </p>
       </section>
 
       <footer className="footer">
